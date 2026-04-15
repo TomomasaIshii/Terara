@@ -1,0 +1,14 @@
+# Terra
+
+このコードは、[zwebzone/terra](https://github.com/zwebzone/terra) をもとに一部編集を加えたものです。
+
+## 概要
+LoRA は、画像生成モデルに対して少ない追加パラメータで調整を加える手法です。  
+Terra は、この LoRA を時間変数 `t` によって連続的に変化させることで、異なる画風のあいだを滑らかにつなぐことを目指す手法です。`t=0` と `t=1` をそれぞれ異なる LoRA に対応させることで、二つの画風のあいだを行き来できます。 :contentReference[oaicite:0]{index=0} :contentReference[oaicite:1]{index=1}
+
+## 問題意識
+ただし Terra は、`t=0` 側と `t=1` 側に与える教師画像の組み合わせによっては、`t` を変えても生成結果がほとんど変化せず、うまく動かない場合があります。 :contentReference[oaicite:2]{index=2} :contentReference[oaicite:3]{index=3}
+
+## このコードについて
+このコードは、その問題を改善するためのものです。  
+具体的には、LoRA の更新のうち動かすパラメータを段階的に選び、一部を固定したまま学習することで、`t` に応じた切り替えが起こりやすくなるようにしています。卒業論文・発表資料では、この考え方を「分離学習」として述べています。 :contentReference[oaicite:4]{index=4} :contentReference[oaicite:5]{index=5}
